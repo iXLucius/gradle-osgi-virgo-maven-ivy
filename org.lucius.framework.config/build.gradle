@@ -1,0 +1,20 @@
+import java.io.File;
+dependencies {
+	compile group: 'org.eclipse.osgi', name: 'org.eclipse.osgi', version: '3.9.1.v20140110-1610'
+	compile group: 'org.eclipse.osgi', name: 'org.eclipse.osgi.services', version: '3.3.100.v20130513-1956'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+	compile group: 'junit', name: 'junit', version: '4.12'
+}
+
+/*task dc {
+	println 'xxxxxxxxxxx'
+	println "$project.projectDir" +
+	File.separator + "build" + File.separator + "dependencies"
+	//"$subproject.projectDir$File.separator"++"build"+File.separator+"dependencies"
+	println project.version
+	println project.name
+	println project.group
+	println project.name.equalsIgnoreCase("org.lucius.framework") ? "pom" : "jar"
+	println "$System.env.JAVA_HOME"+File.separator+"jre"+File.separator+"lib"+File.separator+"rt.jar"
+	println "$File.pathSeparator$System.env.JAVA_HOME"+File.separator+"jre"+File.separator+"lib"+File.separator+"jsse.jar"
+}*/

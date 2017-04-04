@@ -1,0 +1,33 @@
+dependencies {
+	compile group: 'org.apache.commons', name: 'com.springsource.org.apache.commons.dbcp', version: '1.2.2.osgi',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.aop', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.asm', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.aspects', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.beans', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.context', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.context.support', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.core', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.expression', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.jdbc', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.jms', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.orm', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.oxm', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.transaction', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.web', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.web.servlet', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.web.portlet', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.aopalliance', name: 'com.springsource.org.aopalliance', version: '1.0.0',configuration: "compile",ext : "jar"
+	compile group: 'org.eclipse.osgi', name: 'org.eclipse.osgi', version: '3.9.1.v20140110-1610'
+	compile group: 'org.eclipse.osgi', name: 'org.eclipse.osgi.services', version: '3.3.100.v20130513-1956'
+	compile group: 'org.mybatis', name: 'mybatis', version: '3.0.6'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+	compile (group: 'org.mybatis', name: 'mybatis-spring', version: '1.0.2'){
+		transitive = false
+	}
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+	compile project(':org.lucius.framework.config')
+	compile files('../libs/org.eclipse.gemini.blueprint.core_1.0.2.RELEASE.jar',
+				  '../libs/org.eclipse.gemini.blueprint.extender_1.0.2.RELEASE.jar',
+				  '../libs/org.eclipse.gemini.blueprint.io_1.0.2.RELEASE.jar'
+				  )
+}

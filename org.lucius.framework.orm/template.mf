@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.lucius.framework.orm
+Bundle-SymbolicName: org.lucius.framework.orm
+Bundle-Version: ${version}
+Import-Template: org.springframework.*;version="[3.1.0,4)"
+Import-Package: org.osgi.service.cm,
+ org.apache.ibatis.mapping,
+ org.lucius.framework.config.manager
+Excluded-Imports: org.lucius.framework.orm

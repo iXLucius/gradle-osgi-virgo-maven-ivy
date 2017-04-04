@@ -1,0 +1,7 @@
+dependencies {
+	compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+	compile group: 'org.apache.ant', name: 'ant', version: '1.7.1'
+	compile group: 'org.mortbay.jetty', name: 'jetty', version: '6.1.14'
+	compile group: 'org.mortbay.jetty', name: 'jetty-util', version: '6.1.14'
+	compile group: 'org.apache.ant', name: 'ant-testutil', version: '1.7.1'
+}

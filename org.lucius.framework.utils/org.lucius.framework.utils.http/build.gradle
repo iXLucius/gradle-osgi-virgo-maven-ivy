@@ -1,0 +1,33 @@
+dependencies {
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+	compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+	compile group: 'javax.servlet', name: 'com.springsource.javax.servlet', version: '2.5.0',configuration: "compile",ext : "jar"
+	compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+	
+	compile group: 'org.codehaus.jackson', name: 'com.springsource.org.codehaus.jackson.mapper', version: '1.4.3',configuration: "compile",ext : "jar"
+	compile group: 'org.codehaus.jackson', name: 'com.springsource.org.codehaus.jackson', version: '1.4.3',configuration: "compile",ext : "jar"
+	compile group: 'org.apache.commons', name: 'com.springsource.org.apache.commons.collections', version: '3.2.0',configuration: "compile",ext : "jar"
+	compile group: "org.apache.httpcomponents", name: 'com.springsource.org.apache.httpcomponents.httpclient', version: '4.2.1',configuration: "compile",ext : "jar"
+	compile group: "org.apache.httpcomponents", name: 'com.springsource.org.apache.httpcomponents.httpclient-cache', version: '4.2.1',configuration: "compile",ext : "jar"
+	compile group: "org.apache.httpcomponents", name: 'com.springsource.org.apache.httpcomponents.httpcore', version: '4.2.1',configuration: "compile",ext : "jar"
+	compile group: "org.apache.httpcomponents", name: 'com.springsource.org.apache.httpcomponents.httpmime', version: '4.2.1',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.aop', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.asm', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.aspects', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.beans', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.context', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.context.support', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.core', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.expression', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.jdbc', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.jms', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.orm', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.oxm', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.transaction', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.web', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.web.servlet', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.springframework', name: 'org.springframework.web.portlet', version: '3.1.0.RELEASE',configuration: "compile",ext : "jar"
+	compile group: 'org.aopalliance', name: 'com.springsource.org.aopalliance', version: '1.0.0',configuration: "compile",ext : "jar"
+	//compile fileTree(dir: '../../libs', include: 'org.springframework.core_4.2.9.RELEASE.jar')
+}

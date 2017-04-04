@@ -1,0 +1,240 @@
+import java.io.File;
+
+group = "org.lucius.framework"
+version = '0.0.1.SNAPSHOT'
+
+buildscript {
+    repositories {
+        maven {
+			url "http://127.0.0.1:8082/nexus/content/groups/public/"
+		}
+    }
+    dependencies { classpath 'org.eclipse.virgo.bundlor:bundlor-plugin:0.2' }
+}
+
+ext {
+	moduleProjects = subprojects.findAll {
+		!it.name.equals('org.lucius.framework') && !it.name.equals('org.lucius.framework.utils') && !it.name.equals('org.lucius.framework.web')
+	}
+}
+
+configurations.all {
+	
+    // check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+//configure(allprojects.findAll {!it.name.equalsIgnoreCase('org.lucius.framework') && !it.name.equalsIgnoreCase('org.lucius.framework.utils') && !it.name.equalsIgnoreCase('org.lucius.framework.web')}) { project ->
+configure(allprojects) { project ->
+	group = "org.lucius.framework"
+	version = '0.0.1.SNAPSHOT'
+	
+	apply plugin: 'java'
+	//apply plugin: 'osgi'
+	apply plugin: 'eclipse'
+	apply plugin: 'maven'
+	
+	//为所有需要打成jar包的项目引入org.eclipse.virgo.bundlor插件
+	if(!project.name.equalsIgnoreCase('org.lucius.framework') && !project.name.equalsIgnoreCase('org.lucius.framework.utils') && !project.name.equalsIgnoreCase('org.lucius.framework.web')){
+		apply plugin: 'org.eclipse.virgo.bundlor'
+	
+		bundlor {
+		    manifestTemplatePath = "template.mf"
+		    //不检验生成manifest，如果不配置这个选项的话，必须要指定导入包的版本
+		    failOnWarnings = false
+		}
+	}
+	
+	eclipse {
+	    classpath {
+	        downloadJavadoc = false
+	        downloadSources = false
+	    }
+	}
+
+	// 解决使用 OSGi 插件的一个 bug  
+    /*classes.doLast {  
+        // without this, the jar task fails with "java.lang.IllegalArgumentException: A Jar can only accept a valid file or directory:" as underlying cause  
+        ant.mkdir(dir: "$buildDir/classes/main")  
+    }*/
+
+	compileJava {
+		sourceCompatibility = 1.8
+		targetCompatibility = 1.8
+		options.encoding = 'UTF-8'
+	}
+
+	compileTestJava {
+		sourceCompatibility = 1.8
+		targetCompatibility = 1.8
+		options.encoding = 'UTF-8'
+		options.compilerArgs += "-parameters"
+	}
+
+	[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+	//[compileJava, compileTestJava]*.options*.compilerArgs << '-XDignore.symbol.file'
+	//[compileJava, compileTestJava]*.options*.compilerArgs << '-Xlint:unchecked'   
+	//[compileJava, compileTestJava]*.options*.fork = true
+	//[compileJava, compileTestJava]*.options*.bootClasspath = "$System.env.JAVA_HOME/jre/lib/rt.jar"  
+	
+	repositories {
+		maven {
+			url "https://repo1.maven.org/maven2"
+			artifactUrls "http://dist.wso2.org/maven2/"
+		}
+		
+		ivy {
+			url "http://repository.springsource.com/ivy/bundles/external/"
+			layout "pattern", {
+				artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+				ivy "[organisation]/[module]/[revision]/[artifact]-[revision].xml"
+			}
+		}
+		
+		ivy {
+			url "http://repository.springsource.com/ivy/bundles/release/"
+			layout "pattern", {
+				artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+				ivy "[organisation]/[module]/[revision]/[artifact]-[revision].xml"
+			}
+		}
+		
+		ivy {
+			url "http://repository.springsource.com/ivy/libraries/external/"
+			layout "pattern", {
+				artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+				ivy "[organisation]/[module]/[revision]/[artifact]-[revision].xml"
+			}
+		}
+		
+		ivy {
+			url "http://repository.springsource.com/ivy/libraries/release/"
+			layout "pattern", {
+				artifact "[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
+				ivy "[organisation]/[module]/[revision]/[artifact]-[revision].xml"
+			}
+		}
+	}
+	
+	task sourcesJar(type: Jar, dependsOn: classes) {
+		classifier = 'sources'
+		from sourceSets.main.allSource
+		into ('build/src') 
+		// Don't include or exclude anything explicitly by default. See SPR-12085.
+	}
+	
+	/*task javadocJar(type: Jar) {
+		classifier = "javadoc"
+		from javadoc
+		into ('build/docs')
+	}*/
+	
+	//将每个子项目的依赖包copy到每个子目录的build/dependencies目录下
+	task copyToLib(type: Copy) {
+	    from configurations.runtime
+	    into ('build/dependencies')
+	}
+	
+	jar {
+		/*manifest {
+			//instruction 'Export-Package','*;-noimport:=true;version=0.0.1.SNAPSHOT'
+			instruction 'Export-Package','*;-noimport:=true'
+			instruction 'Require-Capability','osgi.ee'
+		}*/
+
+		exclude 'LICENSE.txt','NOTICE.txt','ROOTDOC.TXT','license.txt','notice.txt','rootdoc.txt'
+    	exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA','META-INF/*.rsa', 'META-INF/*.sf', 'META-INF/*.dsa' 
+    	exclude 'META-INF/NOTICE', 'META-INF/NOTICE.txt','META-INF/notice', 'META-INF/notice.txt'
+    	exclude 'META-INF/LICENSE', 'META-INF/LICENSE.txt','META-INF/license', 'META-INF/license.txt'
+    	exclude 'META-INF/DEPENDENCIES','META-INF/dependencies' 
+	}
+	
+	jar.dependsOn copyToLib
+	
+	
+	uploadArchives {
+		repositories {  
+			mavenDeployer {
+				//userName  和 password 为maven的用户名和密码  
+				snapshotRepository(url: "http://127.0.0.1:8082/nexus/content/repositories/snapshots/") {  
+					authentication(userName: "admin", password: "admin123")  
+				}
+				
+				repository(url: "http://127.0.0.1:8082/nexus/content/repositories") {
+		            authentication(userName: "admin", password: "admin123")
+		        }
+				
+                pom.project {
+		            version project.version.replaceAll(".SNAPSHOT","-SNAPSHOT")//版本号
+		            artifactId project.name
+		            groupId project.group
+		            packaging project.name.equalsIgnoreCase("org.lucius.framework") ? "pom" : "jar"
+		            description 'build by gradle'
+		        }
+			}  
+		}  
+	}
+	
+	artifacts {  
+	    archives jar
+	    archives sourcesJar
+		//archives javadocJar
+	}
+}
+
+configure(rootProject) {
+	description = "org.lucius.framework"
+	
+	version = '0.0.1.RELEASE'
+
+	apply plugin: "groovy"
+
+	// don't publish the default jar for the root project
+	configurations.archives.artifacts.clear()
+
+	task distZip(type: Zip) {
+		group = "Distribution"
+		baseName = "org.lucius.framework"
+		classifier = "dist"
+		description = "Builds -${classifier} archive, containing all jars and docs, " +
+			"suitable for community download page."
+
+		ext.baseDir = "${baseName}-" + version;
+
+		moduleProjects.each { subproject ->
+			into ("${baseDir}/dist") {
+				from subproject.jar
+			}
+			
+			into ("${baseDir}/dependencies") {
+				//将每个子项目所用到的依赖拷贝到发布目录
+				from file("$subproject.buildDir" + File.separator + "dependencies")
+				include('**/*.jar')
+			}
+			
+			into ("${baseDir}/src") {
+				if (subproject.tasks.findByPath("sourcesJar")) {
+					from subproject.sourcesJar
+				}
+			}
+			
+			into ("${baseDir}/docs") {
+				if (subproject.tasks.findByPath("javadocJar")) {
+					from subproject.javadocJar
+				}
+			}
+			
+			into ("${baseDir}/dist-with-dependencies") {
+				from subproject.jar
+				//将每个子项目所用到的依赖拷贝到发布目录
+				from file("$subproject.buildDir" + File.separator + "dependencies")
+				include('**/*.jar')
+			}
+		}
+	}
+
+
+	artifacts {
+		archives distZip
+	}
+}

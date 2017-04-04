@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.lucius.framework.web.filter
+Bundle-SymbolicName: org.lucius.framework.web.filter
+Bundle-Version: ${version}
+Import-Template: org.springframework.*;version="[3.1.0,4)",
+ org.apache.http.*
+Import-Package: org.springframework.context.config;version="[3.1.0,4)",
+ org.springframework.aop;version="[3.1.0,4)",
+ org.springframework.aop.framework;version="[3.1.0,4)",
+ org.aopalliance.aop;version="1.0.0",
+ org.hibernate.validator.constraints;version="4.2.0.Final",
+ javax.validation.constraints;version="1.0.0.GA",
+ org.springframework.aop;version="[3.0.5,4)",
+ org.springframework.aop.framework;version="[3.0.5,4)"
+Excluded-Imports: org.lucius.framework.web.filter

@@ -1,0 +1,6 @@
+dependencies {
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+	compile (group: "com.caucho", name: 'com.springsource.com.caucho', version: '3.2.1',configuration: "compile", ext : "jar") {
+		transitive = false
+	}
+}

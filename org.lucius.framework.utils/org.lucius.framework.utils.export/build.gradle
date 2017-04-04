@@ -1,0 +1,6 @@
+dependencies {
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+	compile group: 'net.sourceforge.jexcelapi', name: 'com.springsource.jxl', version: '2.6.6',configuration: "compile", ext : "jar"
+	compile group: 'org.apache.poi', name: 'com.springsource.org.apache.poi', version: '3.9.0.FINAL',configuration: "compile", ext : "jar"
+}

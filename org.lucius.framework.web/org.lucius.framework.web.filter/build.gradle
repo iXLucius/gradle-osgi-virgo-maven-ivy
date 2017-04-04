@@ -1,0 +1,7 @@
+dependencies {
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+	compile group: 'javax.servlet', name: 'com.springsource.javax.servlet', version: '2.5.0',configuration: "compile",ext : "jar"
+	compile project(':org.lucius.framework.model')
+	compile fileTree(dir: '../../libs', include: 'org.springframework.*_4.2.9.RELEASE.jar')
+}
