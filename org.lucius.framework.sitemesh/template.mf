@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Import-Template: org.springframework.*;version="[3.0.5,4)"
+Bundle-Version: 3.0.1.SNAPSHOT
+Bundle-Name: org.sitemesh
+Excluded-Imports: org.sitemesh
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.sitemesh
+
