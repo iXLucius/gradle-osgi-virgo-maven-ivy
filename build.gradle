@@ -6,7 +6,7 @@ version = '0.0.1.SNAPSHOT'
 buildscript {
     repositories {
         maven {
-			url "http://127.0.0.1:8082/nexus/content/groups/public/"
+			url "http://172.16.5.137:8081/nexus/content/groups/public/"
 		}
     }
     dependencies { classpath 'org.eclipse.virgo.bundlor:bundlor-plugin:0.2' }
@@ -156,11 +156,11 @@ configure(allprojects) { project ->
 		repositories {  
 			mavenDeployer {
 				//userName  和 password 为maven的用户名和密码  
-				snapshotRepository(url: "http://127.0.0.1:8082/nexus/content/repositories/snapshots/") {  
+				snapshotRepository(url: "http://172.16.5.137:8081/nexus/content/repositories/snapshots/") {  
 					authentication(userName: "admin", password: "admin123")  
 				}
 				
-				repository(url: "http://127.0.0.1:8082/nexus/content/repositories") {
+				repository(url: "http://172.16.5.137:8081/nexus/content/repositories") {
 		            authentication(userName: "admin", password: "admin123")
 		        }
 				
@@ -185,7 +185,7 @@ configure(allprojects) { project ->
 configure(rootProject) {
 	description = "org.lucius.framework"
 	
-	version = '0.0.1.RELEASE'
+	version = '0.0.1.SNAPSHOT'
 
 	apply plugin: "groovy"
 
